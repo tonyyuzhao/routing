@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Routing</string>
+    <string name="action_settings">Settings</string>
+    <string name="com.prototype.p2p.routing.RoutingActivity">RoutingActivity</string>
+    <string name="message_input_hint">Enter a message</string>
+    <string name="send_button">Send</string>
+
+</resources>
