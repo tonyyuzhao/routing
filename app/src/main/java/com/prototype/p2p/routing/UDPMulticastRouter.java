@@ -14,6 +14,9 @@ import java.net.UnknownHostException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * A simple IP mutlicast router using a static IP
+ */
 public class UDPMulticastRouter implements I_Router {
     public static final String TAG = "UDPMulticastRouter";
 
@@ -57,9 +60,8 @@ public class UDPMulticastRouter implements I_Router {
                     byte[] buf = msg.getBytes();
 
                     try {
-                        //destAddr = InetAddress.getByName("192.168.0.110");
-                        InetAddress destAddr = InetAddress.getByName( "224.3.1.1" );
-                        DatagramPacket packet = new DatagramPacket( buf, buf.length, destAddr, 8000 );
+                        DatagramPacket packet = new DatagramPacket( buf, buf.length,
+                                InetAddress.getByName( "224.3.1.1" ), 8000 );
                         mSocket.send( packet );
 
                         Log.d( TAG, "Message sent to group" );
