@@ -19,50 +19,50 @@ public class RoutingActivity extends ActionBarActivity {
     private I_Router mRouter;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState ) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_routingactivity);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_routingactivity);
 
-        mStatusView = ( TextView ) findViewById( R.id.status );
-        mStatusView.setGravity( Gravity.LEFT );
-        mStatusView.setTextColor( Color.BLUE );
+        mStatusView = (TextView) findViewById(R.id.status);
+        mStatusView.setGravity(Gravity.LEFT);
+        mStatusView.setTextColor(Color.BLUE);
 
-        mRouter = new UDPMulticastRouter( new Handler() {
+        mRouter = new UDPMulticastRouter(new Handler() {
 
             @Override
-            public void handleMessage( Message msg ) {
-                String sendMessage = msg.getData().getString( "Send" );
-                String recvMessage = msg.getData().getString( "Recv" );
+            public void handleMessage(Message msg) {
+                String sendMessage = msg.getData().getString("Send");
+                String recvMessage = msg.getData().getString("Recv");
 
-                if ( sendMessage != null )
-                    mStatusView.append( "To " + sendMessage + "\n" );
+                if (sendMessage != null)
+                    mStatusView.append("To " + sendMessage + "\n");
 
-                if ( recvMessage != null )
-                    mStatusView.append( "From " + recvMessage  + "\n" );
+                if (recvMessage != null)
+                    mStatusView.append("From " + recvMessage + "\n");
             }
-        } );
+        });
     }
 
     @Override
-    public boolean onCreateOptionsMenu( Menu menu ) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate( R.menu.menu_routingactivity, menu );
+        getMenuInflater().inflate(R.menu.menu_routingactivity, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected( MenuItem item ) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if ( id == R.id.action_settings ) {
+        if (id == R.id.action_settings) {
             return true;
         }
 
-        return super.onOptionsItemSelected( item );
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -71,14 +71,14 @@ public class RoutingActivity extends ActionBarActivity {
         super.onDestroy();
     }
 
-    public void clickSend( View v ) {
-        EditText messageView = ( EditText ) this.findViewById( R.id.inputMessage );
-        if ( messageView != null ) {
+    public void clickSend(View v) {
+        EditText messageView = (EditText) this.findViewById(R.id.inputMessage);
+        if (messageView != null) {
             String messageString = messageView.getText().toString();
-            if ( !messageString.isEmpty() ) {
-                mRouter.sendMessage( messageString );
+            if (!messageString.isEmpty()) {
+                mRouter.sendMessage(messageString);
             }
-            messageView.setText( "" );
+            messageView.setText("");
         }
     }
 }
